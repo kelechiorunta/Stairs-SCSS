@@ -1,0 +1,181 @@
+*, *::before, *::after{
+    box-shadow: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body{
+    transform-style: preserve-3d;
+    width:100%;
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(pink, purple);
+    perspective:100em;
+    transform: rotateX(-30deg);
+    transform-origin: center;
+}
+
+@keyframes spin{
+    to{transform: rotateY(-360deg);}
+}
+
+@keyframes spinall{
+    to{transform: rotateY(-360deg);}
+}
+
+.cube{
+    animation: spin 15s linear infinite;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //margin:20em auto;
+    position: relative;
+    width:200px;
+    height:200px;
+    //border: 3px solid black;
+    //background: blue;
+    transform: rotateY(60deg);
+}
+
+.base{
+    //transform-style: preserve-3d;
+    left:0px;
+    top:0px;
+    position: absolute;
+    width:250px;
+    height:200px;
+    border: 3px solid black;
+    background: rgb(43, 255, 0);
+    filter: blur(70%);
+    transform: rotateX(90deg) translateZ(-90px) translateY(-7.5px);
+}
+.cube > div{
+    transform-style: preserve-3d;
+    background: red;
+    position: absolute;
+    width: 200px;
+    height:calc(var(--j) * 50px);//200px;
+    border: 2px solid red;
+    bottom: 0;//calc(var(--j) * 50px);
+    left: calc(var(--j) * 50px);//0;
+    transform: rotateY(90deg) translateZ(-150px) translate(5px); //translateZ(150px);
+
+}
+
+.cube > div::before{
+    content:'';
+    transform-style: preserve-3d;
+    background: rgb(110, 93, 56);
+    position: absolute;
+    width: 200px;
+    height:50px;//calc(var(--j) * 50px);//200px;
+    border: 2px solid black;
+    bottom: calc(var(--j) * 50px);
+    left: 0;
+    transform-origin: top;
+    transform: rotateX(90deg) translateZ(-50px) translateY(-5px); //translateZ(25px) translateY(-5px); //translateZ(150px);
+    
+}
+
+/*
+.cube > div::after{
+    content:'';
+    transform-style: preserve-3d;
+    background: rgb(110, 93, 56);
+    position: absolute;
+    width: 200px;
+    height:50px;//calc(var(--j) * 50px);//200px;
+    border: 2px solid black;
+    bottom: 50px;//calc(var(--j) * 50px);
+    left: 0px;
+    transform-origin: top;
+    transform: rotateY(90deg) rotateZ(90deg) translateZ(-110px) translateY(-5px); //translateZ(25px) translateY(-5px); //translateZ(150px);
+    
+}
+*/
+
+.cube > div::after{
+    content: '';
+    transform-style: preserve-3d;
+    background: red;
+    position: absolute;
+    width: 200px;
+    height:calc(var(--j) * 50px);//200px;
+    border: 2px solid black;
+    bottom: 0;//calc(var(--j) * 50px);
+    left: 200;
+    transform: rotateY(90deg) translateZ(-102.5px) translate(-100px); //translateZ(150px);
+
+}
+
+.cube > div i{
+    content: '';
+    transform-style: preserve-3d;
+    background: red;
+    position: absolute;
+    width: 200px;
+    height:calc(var(--j) * 50px);//200px;
+    border: 2px solid black;
+    bottom: 0;//calc(var(--j) * 50px);
+    left: 200;
+    transform: rotateY(90deg) translateZ(100px) translate(-100px); //translateZ(150px);
+
+}
+
+.cube > div i span{
+    content: '';
+    transform-style: preserve-3d;
+    background: red;
+    position: absolute;
+    width: 200px;
+    height:250px;//calc(var(--j) * 50px);//200px;
+    border: 2px solid red;
+    bottom: 0;//calc(var(--j) * 50px);
+    left: 0px;
+    transform: rotateY(90deg) translateZ(-100px) translate(100px); //translateZ(150px);
+
+}
+
+.cube > div:nth-last-of-type(1) i span{
+    content: '';
+    transform-style: preserve-3d;
+    background: red;
+    position: absolute;
+    width: 200px;
+    height:250px;//calc(var(--j) * 50px);//200px;
+    border: 2px solid black;
+    bottom: 0;//calc(var(--j) * 50px);
+    left: 0px;
+    transform: rotateY(90deg) translateZ(-100px) translate(100px); //translateZ(150px);
+
+}
+
+/*.cube div:hover{
+    filter: brightness(50%);
+    cursor: pointer;
+    background: black;
+}*/
+
+.cube div:hover::before{
+    filter: blur(50%);
+    cursor: pointer;
+    background: green;
+}
+
+@for $k from 1 through 7 {
+    .cube div:nth-child(#{$k}), i span{
+        @keyframes clr{
+            to{
+      background: rgb(random(10) * $k * 10, random(20) * $k * 50%, random($k) * 10%);
+        }}
+      /*right: calc($k * 50px);
+      bottom: calc($k * 20px);*/
+      animation: clr (1s*$k) ease-in infinite;
+      
+
+    }
+}  
